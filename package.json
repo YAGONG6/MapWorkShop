@@ -24,8 +24,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "config": {
+    "MY_VAR": {
+      "required": true
+    }
+  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node index.js",
     "build": "react-scripts build",
     "begin": "react-scripts start",
     "client": "cd src && npm start",
