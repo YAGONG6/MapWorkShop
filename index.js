@@ -41,5 +41,5 @@ app.get('/inc',  async (req, res) => {
   res.status(200).json({ counter: data.counter  });
 });
 // Start the server
-const PORT = process.env.DEV_PORT || 8000;
+const PORT = process.env.DEV_PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
