@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=$PORT react-scripts start",
     "build": "react-scripts build",
     "begin": "react-scripts start",
     "client": "cd src && npm start",
