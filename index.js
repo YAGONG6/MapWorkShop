@@ -7,7 +7,7 @@ const app = express();
 dotenv.config();
 var id = 0;
 // Connect to MongoDB
-console.log(process.env.MONGODB_URI || "mongodb+srv://gyg19981217:Gyg19981217!@cluster0.rbr3eig.mongodb.net/Count")
+console.log(process.env.MONGODB_URI)
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", (err, res) => {
   console.log("mongoose is connected")
