@@ -7,7 +7,7 @@ const app = express();
 dotenv.config();
 var id = 0;
 // Connect to MongoDB
-console.log(process.env.MONGODB_URI )
+console.log(process.env.MONGODB_URI || "mongodb+srv://gyg19981217:Gyg19981217!@cluster0.rbr3eig.mongodb.net/Count")
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", (err, res) => {
   console.log("mongoose is connected")
@@ -41,5 +41,5 @@ app.get('/count',  async (req, res) => {
   res.status(200).json({ counter: data.counter  });
 });
 // Start the server
-const PORT = process.env.DEV_PORT || 8080;
+const PORT = process.env.DEV_PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
