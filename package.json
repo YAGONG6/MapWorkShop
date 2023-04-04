@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node index.js && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "begin": "react-scripts start",
     "client": "cd src && npm start",
