@@ -30,7 +30,7 @@
     }
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "begin": "react-scripts start",
     "client": "cd src && npm start",
