@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function CountButton() {
   const [count, setCount] = useState(0);
-  const backendUrl = `https://map-work-shop.herokuapp.com/`;
+  const backendUrl = `https://map-work-shop.herokuapp.com`;
   async function handleClick () {
     const response = await axios.get(`${backendUrl}/inc`);
     console.log(response)
