@@ -29,7 +29,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Define routes
 
-app.get('/',  async (req, res) => {
+app.use('/count');
+app.use('/inc');
+
+app.get('/count',  async (req, res) => {
  
   const data = await Counter.findOne({_id:id});
   console.log(data)
