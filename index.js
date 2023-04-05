@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/count');
 app.use('/inc');
 
-app.get('/count',  async (req, res) => {
+app.get('/',  async (req, res) => {
  
   const data = await Counter.findOne({_id:id});
   console.log(data)
