@@ -31,9 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/',  async (req, res) => {
  
-  //const data = await Counter.findOne({_id:id});
-  //console.log(data)
-  res.status(200).json({ counter: 5  });
+  const data = await Counter.findOne({_id:id});
+  console.log(data)
+  res.status(200).json({ counter: data.counter  });
 });
 app.get('/inc',  async (req, res) => {
   const data = await Counter.findOneAndUpdate({_id:id},{ $inc: { counter: 1 } }, { returnDocument: "after" });
