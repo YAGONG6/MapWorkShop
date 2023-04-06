@@ -29,6 +29,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define routes
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Define your API routes here
+
+// Catch-all route that sends back the index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 
 app.get('/',  async (req, res) => {
  
