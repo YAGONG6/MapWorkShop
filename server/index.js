@@ -39,7 +39,7 @@ app.get('*', (req, res) => {
 });
 
 
-app.get('/',  async (req, res) => {
+app.get('/count',  async (req, res) => {
  
   const data = await Counter.findOne({_id:id});
   console.log(data)
