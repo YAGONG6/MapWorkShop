@@ -40,12 +40,15 @@ app.get('*', (req, res) => {
 
 
 app.get('/count',  async (req, res) => {
- 
+
+  console.log(1234566756);
   const data = await Counter.findOne({_id:id});
   console.log(data)
   res.status(200).send({ counter: 5  });
 });
+
 app.get('/inc',  async (req, res) => {
+  console.log(6756);
   const data = await Counter.findOneAndUpdate({_id:id},{ $inc: { counter: 1 } }, { returnDocument: "after" });
   console.log(data)
   res.status(200).send({ counter: 10  });
