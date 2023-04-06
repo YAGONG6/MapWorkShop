@@ -7,7 +7,7 @@ function CountButton() {
   async function handleClick () {
     const response = await axios.post(`https://map-work-shop.herokuapp.com/MapWorkShop/users/signin`, {
       email: "yanguang.gong@stonybrook.edu",
-      password: "123456",
+      password: "abcdef",
       username: "1fweg3"
     });
     console.log(response.data);
