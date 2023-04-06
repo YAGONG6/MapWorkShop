@@ -6,7 +6,7 @@ function CountButton() {
   const backendUrl = `https://map-work-shop.herokuapp.com`;
   async function handleClick () {
     const response = await axios.get(`${backendUrl}/api/inc`);
-    console.log(response.data)
+    console.log(response.data);
     setCount(count + 1);
   }
   useEffect(() => {
