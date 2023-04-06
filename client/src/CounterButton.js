@@ -5,21 +5,17 @@ function CountButton() {
   const [count, setCount] = useState(0);
   const backendUrl = `https://map-work-shop.herokuapp.com`;
   async function handleClick () {
-    const response = await axios.get(`${backendUrl}/inc`);
+    const response = await axios.get(`${backendUrl}/api/inc`);
     console.log(response.data)
     setCount(count + 1);
   }
   useEffect(() => {
     async function fetchCount() {
-      const response = await axios.get(`https://map-work-shop.herokuapp.com/count`);
+      const response = await axios.get(`https://map-work-shop.herokuapp.com/api/count`);
       console.log(response);
       setCount(response.data.counter);
     }
-    //fetchCount();
-
-    fetch(`https://map-work-shop.herokuapp.com/count`)
-    .then((response) => response.json())
-    .then((data) => console.log(data.message));
+    fetchCount();
 
   }, []);
   return (

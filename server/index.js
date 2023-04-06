@@ -38,8 +38,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
-app.use('/count');
-app.use('/inc');
+const router = new express.Router();
+app.use('/api', router);
 
 app.get('/count',  async (req, res) => {
 
