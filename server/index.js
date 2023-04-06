@@ -37,17 +37,11 @@ const start = async () => {
     });
     console.log("Connected to MongoDb!");
 
-    app.use(express.static(path.join(__dirname, '../client/build')));
-
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-    });
-
   } catch (err) {
     console.error(err);
   }
 
-  const PORT = process.env.DEV_PORT || 4000; 
+  const PORT = process.env.PORT || 4000; 
   app.listen(PORT, () => {
     console.log("Listening on port " + `${PORT}` + " !!!");
   });
@@ -59,6 +53,12 @@ app.use(userRoutes);
 app.use(commentRoutes);
 app.use(mapRoutes);
 
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 const db = mongoose.connection;
 
