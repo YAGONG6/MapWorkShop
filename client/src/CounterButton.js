@@ -11,7 +11,7 @@ function CountButton() {
   }
   useEffect(() => {
     async function fetchCount() {
-      const response = await axios.get(`https://map-work-shop.herokuapp.com`);
+      const response = await axios.get(`https://map-work-shop.herokuapp.com/count`);
       console.log(response);
       setCount(response.data.counter);
     }
