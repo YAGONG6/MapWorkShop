@@ -47,7 +47,7 @@ const start = async () => {
     console.error(err);
   }
 
-  const PORT = process.env.PORT || 8000; 
+  const PORT = process.env.PORT || 4000; 
   app.listen(PORT, () => {
     console.log("Listening on port " + `${PORT}` + " !!!");
   });
