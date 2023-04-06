@@ -1,61 +1,75 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const Counter= require('./model/CounterSchema');
-const app = express();
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+const mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
-var id = 0;
-// Connect to MongoDB
-console.log(process.env.MONGODB_URI || "mongodb+srv://gyg19981217:Gyg19981217!@cluster0.rbr3eig.mongodb.net/Count")
-mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on("connected", (err, res) => {
-  console.log("mongoose is connected")
-  const newCounter = new Counter({ counter: 0 })
-  newCounter.save().then(res=>
-    
-    {id=res._id.toString();
-      console.log(res)
-    console.log(id)});
-})
+const userRoutes = require('./routes/user-routes');
+const commentRoutes = require('./routes/comment-routes');
+const mapRoutes = require('./routes/map-routes');
 
-
-// Enable CORS
+const app = express();
+app.set('trust proxy', true);
 app.use(cors());
-
-// Add middleware for parsing JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({ 
+                  secret: 'sk',
+                  cookie: {},
+                  resave: false,
+                  saveUninitialized: true, 
+                  store: MongoStore.create({
+                  mongoUrl: process.env.MONGODB_URI,
+}) }));
 
-// Define routes
-app.use(express.static(path.join(__dirname, '../client/build')));
+//  connect MongoDB
+const start = async () => {
+  if (!process.env.JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
 
-// Define your API routes here
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("Connected to MongoDb!");
 
-// Catch-all route that sends back the index.html file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    app.use(express.static(path.join(__dirname, '../client/build')));
+
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  app.listen(process.env.DEV_PORT || 8000, () => {
+    console.log("Listening on port " + (process.env.DEV_PORT || 8000) + " !!!");
+  });
+};
+
+start();
+
+app.use(userRoutes);
+app.use(commentRoutes);
+app.use(mapRoutes);
+
+
+const db = mongoose.connection;
+
+db.on('error', function (err) {
+  console.error(err);
 });
 
-const router = new express.Router();
-app.use('/api', router);
-
-router.get('/count',  async (req, res) => {
-
-  console.log(1234566756);
-  const data = await Counter.findOne({_id:id});
-  console.log(data)
-  res.status(200).json({ counter: 5  });
+process.on('SIGINT', async () => {
+  await db.close();
+  console.info('Server closed. Database instance disconnected');
+  process.exit(0);
 });
 
-router.get('/inc',  async (req, res) => {
-  console.log(6756);
-  const data = await Counter.findOneAndUpdate({_id:id},{ $inc: { counter: 1 } }, { returnDocument: "after" });
-  console.log(data)
-  res.status(200).json({ counter: 10  });
-});
-// Start the server
-const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app;

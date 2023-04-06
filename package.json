@@ -31,6 +31,7 @@
       "required": true
     }
   },
+  "homepage": ".",
   "scripts": {
     "start": "node server/index.js",
     "build": "react-scripts build",
