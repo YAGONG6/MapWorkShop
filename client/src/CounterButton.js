@@ -10,13 +10,13 @@ function CountButton() {
     setCount(count + 1);
   }
   useEffect(() => {
-    async function fetchCount() {
-      const response = await axios.get(`https://map-work-shop.herokuapp.com/api/count`);
-      console.log(response);
-      setCount(response.data.counter);
-    }
-    fetchCount();
-
+    // async function fetchCount() {
+    //   const response = await axios.get(`https://map-work-shop.herokuapp.com/api/count`);
+    //   console.log(response);
+    //   setCount(response.data.counter);
+    // }
+    // fetchCount();
+    console.log("Heroku Open");
   }, []);
   return (
     <div>
