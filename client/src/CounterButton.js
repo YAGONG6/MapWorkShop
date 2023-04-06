@@ -15,7 +15,12 @@ function CountButton() {
       console.log(response);
       setCount(response.data.counter);
     }
-    fetchCount();
+    //fetchCount();
+
+    fetch(`https://map-work-shop.herokuapp.com/count`)
+    .then((response) => response.json())
+    .then((data) => console.log(data.message));
+
   }, []);
   return (
     <div>
