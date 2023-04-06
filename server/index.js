@@ -43,12 +43,12 @@ app.get('/count',  async (req, res) => {
  
   const data = await Counter.findOne({_id:id});
   console.log(data)
-  res.status(200).json({ counter: 5  });
+  res.status(200).send({ counter: 5  });
 });
 app.get('/inc',  async (req, res) => {
   const data = await Counter.findOneAndUpdate({_id:id},{ $inc: { counter: 1 } }, { returnDocument: "after" });
   console.log(data)
-  res.status(200).json({ counter: 10  });
+  res.status(200).send({ counter: 10  });
 });
 // Start the server
 const PORT = process.env.PORT || 5000;

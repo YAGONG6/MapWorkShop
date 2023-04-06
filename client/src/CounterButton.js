@@ -6,13 +6,13 @@ function CountButton() {
   const backendUrl = `https://map-work-shop.herokuapp.com`;
   async function handleClick () {
     const response = await axios.get(`${backendUrl}/inc`);
-    console.log(response)
+    console.log(response.data)
     setCount(count + 1);
   }
   useEffect(() => {
     async function fetchCount() {
-      const response = await axios.get(`https://map-work-shop.herokuapp.com/count`);
-      console.log(response)
+      const response = await axios.get(`https://map-work-shop.herokuapp.com`);
+      console.log(response.data);
       setCount(response.data.counter);
     }
     fetchCount();
